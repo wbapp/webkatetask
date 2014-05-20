@@ -1,0 +1,7 @@
+parameters:
+#    web_kate_test_task.example.class: WebKate\Bundle\TestTaskBundle\Example
+
+services:
+#    web_kate_test_task.example:
+#        class: %web_kate_test_task.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

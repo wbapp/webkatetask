@@ -1,0 +1,4 @@
+web_kate_test_task:
+    resource: "@WebKateTestTaskBundle/Resources/config/routing.yml"
+    prefix:   /
+
