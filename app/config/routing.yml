@@ -1,4 +1,12 @@
-web_kate_test_task:
+_web_kate_test_task:
     resource: "@WebKateTestTaskBundle/Resources/config/routing.yml"
     prefix:   /
+
+_web_kate_test_task_project:
+     resource: "@WebKateTestTaskBundle/Resources/config/routing/project.yml"
+     prefix:   /project
+
+_web_kate_test_task_category:
+     resource: "@WebKateTestTaskBundle/Resources/config/routing/category.yml"
+     prefix:   /category
 
