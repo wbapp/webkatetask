@@ -1,0 +1,30 @@
+executor:
+    pattern:  /
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:index" }
+
+executor_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:show" }
+
+executor_new:
+    pattern:  /new
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:new" }
+
+executor_create:
+    pattern:  /create
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:create" }
+    requirements: { _method: post }
+
+executor_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:edit" }
+
+executor_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:update" }
+    requirements: { _method: post|put }
+
+executor_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "WebKateTestTaskBundle:Executor:delete" }
+    requirements: { _method: post|delete }

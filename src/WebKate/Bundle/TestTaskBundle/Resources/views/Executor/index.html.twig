@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Executor list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Secondname</th>
+                <th>Firstname</th>
+                <th>Patronymic</th>
+                <th>Birthday</th>
+                <th>Careerbeggining</th>
+                <th>Email</th>
+                <th>Phonenumber</th>
+                <th>Address</th>
+                <th>Technologyused</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('executor_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.secondName }}</td>
+                <td>{{ entity.firstName }}</td>
+                <td>{{ entity.patronymic }}</td>
+                <td>{% if entity.birthday %}{{ entity.birthday|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.careerBeggining %}{{ entity.careerBeggining|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.phoneNumber }}</td>
+                <td>{{ entity.address }}</td>
+                <td>{{ entity.technologyUsed }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('executor_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('executor_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('executor_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

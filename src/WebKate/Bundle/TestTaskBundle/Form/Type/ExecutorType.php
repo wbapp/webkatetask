@@ -15,16 +15,15 @@ class ExecutorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('secondName')
-            ->add('firstName')
-            ->add('patronymic')
-            ->add('birthday')
-            ->add('careerBeggining')
-            ->add('email')
-            ->add('phoneNumber')
-            ->add('address')
-            ->add('technologyUsed')
-            ->add('projects')
+            ->add('secondName', 'text', array('label' => 'Secondname'))
+            ->add('firstName', 'text', array('label' => 'Firstname'))
+            ->add('patronymic', 'text', array('label' => 'Patronymic'))
+            ->add('birthday', 'date', array('label' => 'Birthday'))
+            ->add('careerBeggining', 'date', array('label' => 'Career beginning'))
+            ->add('email', 'email', array('label' => 'Email'))
+            ->add('phoneNumber', 'text', array('label' => 'Phone number'))
+            ->add('address', 'text', array('label' => 'Address'))
+            ->add('technologyUsed', 'text', array('label' => 'The technologies used'))
         ;
     }
 
