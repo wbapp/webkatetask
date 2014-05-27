@@ -1,170 +1,91 @@
-Symfony Standard Edition
-========================
+                            Тестовое задание для разработчика на Symfony2
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+        В основном:
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+        Создать web-приложение, которое будет вмещать в себе:
 
-1) Installing the Standard Edition
-----------------------------------
+            • «Категории» — просмотр,создание, редактирование, удаление.
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+            • «Проекты» — просмотр,создание, редактирование, удаление.
 
-### Use Composer (*recommended*)
+            • «Исполнители» к проектам — просмотр, фильтрация, добавление
 
-As Symfony uses [Composer][2] to manage its dependencies, the recommended way
-to create a new project is to use it.
+        Каждый проект должен принадлежать какой-то категории.
 
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+        Над одним проектом может работать один и больше исполнителей. У любого исполнителя может
 
-    curl -s http://getcomposer.org/installer | php
+быть один и больше проектов.
 
-Then, use the `create-project` command to generate a new Symfony application:
+        Необходимо создать страницы: управление основными элементами («Категории», «Проекты»),
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+просмотр проектов в древовидной структуре: «Категория» — «Проект» — «Исполнители», просмотр
 
-Composer will install Symfony and all its dependencies under the
-`path/to/install` directory.
+исполнителей с фильтрацией по дате старта карьеры.
 
-### Download an Archive File
+        У «Категории» должны быть поля: ID, название.
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
-Edition and unpack it somewhere under your web server root directory.
+        У «Проекта» должны быть поля: ID, связь с категорией, название, время добавления, имя компании/
 
-If you downloaded an archive "without vendors", you also need to install all
-the necessary dependencies. Download composer (see above) and run the
-following command:
+заказчика.
 
-    php composer.phar install
+        У «Исполнителя» должны быть поля: ID, связь с проектом, ФИО, дата рождения, дата начала
 
-2) Checking your System Configuration
--------------------------------------
+карьеры, контактные данные, используемые технологии.
 
-Before starting coding, make sure that your local system is properly
-configured for Symfony.
+        Все поля обязательны к заполнению.
 
-Execute the `check.php` script from the command line:
 
-    php app/check.php
+                                    Подробно технически:
 
-The script returns a status code of `0` if all mandatory requirements are met,
-`1` otherwise.
+По проекту:
 
-Access the `config.php` script from a browser:
+• сервисы в xml;
 
-    http://localhost/path/to/symfony/app/web/config.php
+• роутинги в yml;
 
-If you get any warnings or recommendations, fix them before moving on.
+• описание Entity — анотациями;
 
-3) Browsing the Demo Application
---------------------------------
+• в качестве HTML-фреймворка можно взять Twitter Bootstrap, или любой другой.
 
-Congratulations! You're now ready to use Symfony.
+Использоваеть для стилизации вывода информации, форм, и т. д. (если будет достаточно на
 
-From the `config.php` page, click the "Bypass configuration and go to the
-Welcome page" link to load up your first Symfony page.
+это времени);
 
-You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the `config.php` page.
+• шаблонизатор — twig.
 
-To see a real-live Symfony page in action, access the following page:
+План:
 
-    web/app_dev.php/demo/hello/Fabien
+1. Развернуть проект с Symfony2, в качестве СУБД использовать MySQL
 
-4) Getting started with Symfony
--------------------------------
+2. Создать основной бандл проекта.
 
-This distribution is meant to be the starting point for your Symfony
-applications, but it also contains some sample code that you can learn from
-and play with.
+3. Подключить Doctrine ORM, Doctrine Bundle.
 
-A great way to start learning Symfony is via the [Quick Tour][4], which will
-take you through all the basic features of Symfony2.
+4. Создать 3 Entity: «Категории», «Проекты», «Исполнители».
 
-Once you're feeling good, you can move onto reading the official
-[Symfony2 book][5].
+5. Связи:
 
-A default bundle, `AcmeDemoBundle`, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
+        1. «Категории» / «Проекты» — один ко многим.
 
-  * delete the `src/Acme` directory;
+        2. «Проекты» / «Исполнители» — многие ко многим.
 
-  * remove the routing entry referencing AcmeDemoBundle in `app/config/routing_dev.yml`;
+6. Для Entity «Исполнители» создать Form Type, анотациями добавить валидацию.
 
-  * remove the AcmeDemoBundle from the registered bundles in `app/AppKernel.php`;
+7. Для остальных Entity — использовать CRUD из-под консоли.
 
-  * remove the `web/bundles/acmedemo` directory;
+8. Для Entity «Исполнители» создать Entity-репозиторий
 
-  * empty the `security.yml` file or tweak the security configuration to fit
-    your needs.
+        1. Добавить методы для фильтрации данных по полю, которое хранит в себе дату (начало
 
-What's inside?
----------------
+        2. Репозиторий объявить и использовать как сервис.
 
-The Symfony Standard Edition is configured with the following defaults:
+9. Для построения древовидной структуры создать класс-сервис.
 
-  * Twig is the only configured template engine;
+        1. Подключить в services.xml.
 
-  * Doctrine ORM/DBAL is configured;
+        2. В конструктор параметром передать сервис репозитория.
 
-  * Swiftmailer is configured;
+        3. Реализовать методы по выборке данных и подготовке их для передачи в twig.
 
-  * Annotations for everything are enabled.
+        4. Использовать в контроллере.
 
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
-    code
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.4/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://symfony.com/download
-[4]:  http://symfony.com/doc/2.4/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.4/index.html
-[6]:  http://symfony.com/doc/2.4/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.4/book/doctrine.html
-[8]:  http://symfony.com/doc/2.4/book/templating.html
-[9]:  http://symfony.com/doc/2.4/book/security.html
-[10]: http://symfony.com/doc/2.4/cookbook/email.html
-[11]: http://symfony.com/doc/2.4/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.4/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.4/bundles/SensioGeneratorBundle/index.html
