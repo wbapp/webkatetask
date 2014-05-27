@@ -24,6 +24,7 @@ class ExecutorType extends AbstractType
             ->add('phoneNumber', 'text', array('label' => 'Phone number'))
             ->add('address', 'text', array('label' => 'Address'))
             ->add('technologyUsed', 'text', array('label' => 'The technologies used'))
+            ->add('submit', 'submit', array('label' => 'Submit'))
         ;
     }
 

@@ -1,3 +1,10 @@
-web_kate_test_task_homepage:
+_web_kate_test_task_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: WebKateTestTaskBundle:Default:index }
+
+_web_kate_test_task_executor_create:
+    pattern: /executor/create
+    defaults: { _controller: WebKateTestTaskBundle:Default:createExecutor }
+#    requirements: { _method: post }
+
+

@@ -95,5 +95,9 @@ class Category
         return $this->projects;
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
 }
