@@ -2,7 +2,9 @@
 
 namespace WebKate\Bundle\TestTaskBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Executor
@@ -23,63 +25,68 @@ class Executor
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(max="255", maxMessage="Your first name cannot be longer than 255 characters")
      * @ORM\Column(name="secondName", type="string", length=255)
      */
     private $secondName;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(max="255", maxMessage="Your first name cannot be longer than 255 characters")
      * @ORM\Column(name="firstName", type="string", length=255)
      */
     private $firstName;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(max="255", maxMessage="Your first name cannot be longer than 255 characters")
      * @ORM\Column(name="patronymic", type="string", length=255)
      */
     private $patronymic;
 
     /**
-     * @var \Date
-     *
+     * @var \DateTime
+     * @Assert\Date()
      * @ORM\Column(name="birthday", type="date")
      */
     private $birthday;
 
     /**
-     * @var \Date
-     *
+     * @var \DateTime
+     * @Assert\Date()
      * @ORM\Column(name="careerBeggining", type="date")
      */
     private $careerBeggining;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="phoneNumber", type="integer")
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/^[+0-9 ()-]+$/")
+     * @ORM\Column(name="phoneNumber", type="string")
      */
     private $phoneNumber;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="address", type="string", length=255)
      */
     private $address;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="technologyUsed", type="string", length=255)
      */
     private $technologyUsed;
@@ -89,6 +96,11 @@ class Executor
      * @ORM\JoinTable(name="projects_executors")
      */
     private $projects;
+
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -172,7 +184,7 @@ class Executor
     /**
      * Set birthday
      *
-     * @param \Date $birthday
+     * @param \DateTime $birthday
      * @return Executor
      */
     public function setBirthday($birthday)
@@ -185,7 +197,7 @@ class Executor
     /**
      * Get birthday
      *
-     * @return \Date
+     * @return \DateTime
      */
     public function getBirthday()
     {
@@ -193,22 +205,29 @@ class Executor
     }
 
     /**
-     * @param \Date $careerBeggining
+     * Set careerBeggining
+     *
+     * @param \DateTime $careerBeggining
+     * @return Executor
      */
+
     public function setCareerBeggining($careerBeggining)
     {
         $this->careerBeggining = $careerBeggining;
+
+        return $this;
     }
 
     /**
-     * @return \Date
+     * Get careerBeggining
+     *
+     * @return \DateTime
      */
+
     public function getCareerBeggining()
     {
         return $this->careerBeggining;
     }
-
-
 
     /**
      * Set email
@@ -234,27 +253,22 @@ class Executor
     }
 
     /**
-     * Set phoneNumber
-     *
-     * @param integer $phoneNumber
-     * @return Executor
+     * @param string $phoneNumber
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
     }
 
     /**
-     * Get phoneNumber
-     *
-     * @return integer
+     * @return string
      */
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
+
+
 
     /**
      * Set address
@@ -303,11 +317,11 @@ class Executor
     }
 
     /**
-     * Set projects
-     * @param \WebKateTestTaskBundle\Entity\Project
+     * @param ArrayCollection $projects
      * @return $this
      */
-    public function setProjects($projects)
+
+    public function setProjects(ArrayCollection $projects)
     {
         $this->projects = $projects;
 
@@ -322,5 +336,9 @@ class Executor
         return $this->projects;
     }
 
+    public function __toString()
+    {
+        return $this->getSecondName();
+    }
 
 }
