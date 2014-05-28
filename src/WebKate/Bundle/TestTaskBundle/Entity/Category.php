@@ -4,6 +4,7 @@ namespace WebKate\Bundle\TestTaskBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -24,7 +25,8 @@ class Category
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(max="255", maxMessage="Your first name cannot be longer than 255 characters")
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -43,7 +45,7 @@ class Category
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +68,7 @@ class Category
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -93,5 +95,9 @@ class Category
         return $this->projects;
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
 }
