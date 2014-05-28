@@ -6,8 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array('name' => $name));
+        $projects = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('WebKateTestTaskBundle:Project')
+            ->findAll()
+            ;
+
+        return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
+            'projects' => $projects
+        ));
     }
 }
