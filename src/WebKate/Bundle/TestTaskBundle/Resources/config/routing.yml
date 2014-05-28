@@ -3,5 +3,5 @@ _homepage:
     defaults: { _controller: WebKateTestTaskBundle:Default:index }
 
 _executor_create:
-    path: /ecexutor/create
+    path: /executor/create
     defaults: { _controller: WebKateTestTaskBundle:Default:createExecutor }
