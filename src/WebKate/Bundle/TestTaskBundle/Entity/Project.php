@@ -5,6 +5,7 @@ namespace WebKate\Bundle\TestTaskBundle\Entity;
 use WebKate\Bundle\TestTaskBundle\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -25,21 +26,22 @@ class Project
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
+     * @Assert\Date()
      * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="customer", type="string", length=255)
      */
     private $customer;
@@ -53,12 +55,8 @@ class Project
     /**
      * @ORM\ManyToMany(targetEntity="Executor", mappedBy="projects")
      */
-    private $executors;
 
-    public function __construct()
-    {
-        $this->executors = new ArrayCollection();
-    }
+    private $executors;
 
     /**
      * Get id
