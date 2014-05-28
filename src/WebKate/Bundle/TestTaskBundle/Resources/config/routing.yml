@@ -1,3 +1,8 @@
-web_kate_test_task_homepage:
-    pattern:  /hello/{name}
+_homepage:
+    path:  /
     defaults: { _controller: WebKateTestTaskBundle:Default:index }
+
+_executor_create:
+    path: /ecexutor/create
+    defaults: { _controller: WebKateTestTaskBundle:Default:createExecutor }
+

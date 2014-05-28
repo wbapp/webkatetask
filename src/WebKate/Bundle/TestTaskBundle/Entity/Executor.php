@@ -43,16 +43,16 @@ class Executor
     private $patronymic;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="birthday", type="datetime")
+     * @ORM\Column(name="birthday", type="date")
      */
     private $birthday;
 
     /**
-     * @var string
+     * @var \Date
      *
-     * @ORM\Column(name="careerBeggining", type="string", length=255)
+     * @ORM\Column(name="careerBeggining", type="date")
      */
     private $careerBeggining;
 
@@ -172,7 +172,7 @@ class Executor
     /**
      * Set birthday
      *
-     * @param \DateTime $birthday
+     * @param \Date $birthday
      * @return Executor
      */
     public function setBirthday($birthday)
@@ -185,7 +185,7 @@ class Executor
     /**
      * Get birthday
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getBirthday()
     {
@@ -193,27 +193,22 @@ class Executor
     }
 
     /**
-     * Set careerBeggining
-     *
-     * @param string $careerBeggining
-     * @return Executor
+     * @param \Date $careerBeggining
      */
     public function setCareerBeggining($careerBeggining)
     {
         $this->careerBeggining = $careerBeggining;
-
-        return $this;
     }
 
     /**
-     * Get careerBeggining
-     *
-     * @return string
+     * @return \Date
      */
     public function getCareerBeggining()
     {
         return $this->careerBeggining;
     }
+
+
 
     /**
      * Set email

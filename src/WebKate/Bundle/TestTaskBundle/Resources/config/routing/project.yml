@@ -1,0 +1,30 @@
+project:
+    pattern:  /
+    defaults: { _controller: "WebKateTestTaskBundle:Project:index" }
+
+project_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "WebKateTestTaskBundle:Project:show" }
+
+project_new:
+    pattern:  /new
+    defaults: { _controller: "WebKateTestTaskBundle:Project:new" }
+
+project_create:
+    pattern:  /create
+    defaults: { _controller: "WebKateTestTaskBundle:Project:create" }
+    requirements: { _method: post }
+
+project_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "WebKateTestTaskBundle:Project:edit" }
+
+project_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "WebKateTestTaskBundle:Project:update" }
+    requirements: { _method: post|put }
+
+project_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "WebKateTestTaskBundle:Project:delete" }
+    requirements: { _method: post|delete }
