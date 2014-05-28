@@ -10,6 +10,23 @@ use WebKate\Bundle\TestTaskBundle\Form\Type\ExecutorType;
 class DefaultController extends Controller
 {
 
+    public function indexAction()
+    {
+        $projects = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('WebKateTestTaskBundle:Project')
+            ->findAll()
+        ;
+
+        return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
+            'projects' => $projects
+        ));
+    }
+
+    public function allExecutorsAction()
+    {
+        $executors = $this->get('')
+    }
     public function createExecutorAction(Request $request)
     {
         $executor = new Executor();
@@ -28,16 +45,5 @@ class DefaultController extends Controller
         ));
     }
 
-    public function indexAction()
-    {
-        $projects = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('WebKateTestTaskBundle:Project')
-            ->findAll()
-            ;
 
-        return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
-            'projects' => $projects
-        ));
-    }
 }

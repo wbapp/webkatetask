@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExecutorRepository extends EntityRepository
 {
+    public function findAllOrderByCareerBeggining()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.careerBeggining')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
