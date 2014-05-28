@@ -25,7 +25,7 @@ class ExecutorType extends AbstractType
             ->add('address')
             ->add('technologyUsed')
             ->add('projects')
-            ->add('submit')
+            ->add('submit', 'submit')
         ;
     }
 
