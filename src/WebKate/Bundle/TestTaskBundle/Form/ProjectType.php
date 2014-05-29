@@ -16,7 +16,7 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('createdAt', 'datetime')
+            ->add('createdAt', 'date')
             ->add('customer')
             ->add('category')
         ;

@@ -11,6 +11,29 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% block menu %}
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Project name</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ path('_homepage') }}">Home</a></li>
+                            <li class="active"><a href="{{ path('category') }}">Category</a></li>
+                            <li><a href="{{ path('project') }}">Project</a></li>
+
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        {% endblock %}
         {% block body %}{% endblock %}
     <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>

@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'WebKateTestTaskBundle::layout.html.twig' %}
 
 {% block body -%}
     <h1>Category list</h1>
@@ -38,4 +38,6 @@
             </a>
         </li>
     </ul>
+
+    {{ render(controller('WebKateTestTaskBundle:Category:create')) }}
     {% endblock %}

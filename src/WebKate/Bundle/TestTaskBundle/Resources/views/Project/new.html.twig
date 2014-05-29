@@ -1,9 +1,25 @@
-{% extends '::base.html.twig' %}
+{#{% extends 'WebKateTestTaskBundle::layout.html.twig' %}#}
 
 {% block body -%}
-    <h1>Project creation</h1>
+    <h1>Creat Project</h1>
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_widget(form.title) }}
 
-    {{ form(form) }}
+                {{ form_widget(form.customer) }}
+
+                {{ form_widget(form.category) }}
+
+                {{ form_widget(form.createdAt) }}
+
+                {{ form_widget(form.submit) }}
+            </div>
+            {{ form_rest(form) }}
+        </div>
+    </div>
 
         <ul class="record_actions">
     <li>

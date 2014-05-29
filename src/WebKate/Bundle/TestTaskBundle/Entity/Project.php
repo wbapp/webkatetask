@@ -58,6 +58,10 @@ class Project
 
     private $executors;
 
+    public function __construct()
+    {
+        $this->executors = new ArrayCollection();
+    }
     /**
      * Get id
      *
