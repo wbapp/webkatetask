@@ -6,30 +6,37 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use WebKate\Bundle\TestTaskBundle\Entity\Executor;
 use WebKate\Bundle\TestTaskBundle\Form\Type\ExecutorType;
+use WebKate\Bundle\TestTaskBundle\Entity\Category;
+use WebKate\Bundle\TestTaskBundle\Entity\Project;
+use WebKate\Bundle\TestTaskBundle\Entity\CategoryRepository;
 
 class DefaultController extends Controller
 {
 
     public function indexAction()
     {
-        $projects = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('WebKateTestTaskBundle:Project')
-            ->findAll()
+//        $projects = $this->getDoctrine()
+//            ->getManager()
+//            ->getRepository('WebKateTestTaskBundle:Project')
+//            ->findAll()
+//        ;
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('WebKateTestTaskBundle:Category')
+            ->getCategoriesWithProjects()
         ;
-        $categories = $this->getDoctrine()
-            ->getRepository('WebKateTestTaskBundle:Category')
-            ->findAll()
-        ;
-
-        $executors = $this->get('web_kate_test_task_bundle.executor.repository')
-            ->findAllOrderByCareerBeggining()
-        ;
-
+        var_dump($categories);
+//        $executors = $this->get('web_kate_test_task_bundle.executor.repository')
+//            ->findAllOrderByCareerBeggining()
+//        ;
+        foreach($categories as $category) {
+            $category->setProjects(
+                $em->getRepository('WebKateTestTaskBundle:Project')
+                    ->findProjectsByCategoryId($category->getId()));
+        }
         return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
-            'projects' => $projects,
+//            'projects' => $projects,
             'categories' => $categories,
-            'executors' => $executors,
+//            'executors' => $executors,
         ));
     }
 
@@ -37,10 +44,10 @@ class DefaultController extends Controller
     {
         $executors = $this->get('web_kate_test_task_bundle.executor.repository')
             ->findAllOrderByCareerBeggining()
-            ;
+        ;
 
         return $this->render('WebKateTestTaskBundle:Default:executors.html.twig', array(
-           'executors' => $executors,
+            'executors' => $executors,
         ));
     }
     public function createExecutorAction(Request $request)

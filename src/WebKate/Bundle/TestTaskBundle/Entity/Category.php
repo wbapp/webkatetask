@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Category
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WebKate\Bundle\TestTaskBundle\Entity\CategoryRepository")
  */
 class Category
 {
@@ -76,11 +76,10 @@ class Category
     }
 
     /**
-     * @param ArrayCollection $projects
+     * @param $projects
      * @return $this
      */
-
-    public function setProjects(ArrayCollection $projects)
+    public function setProjects($projects)
     {
         $this->projects = $projects;
 
@@ -88,7 +87,7 @@ class Category
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getProjects()
     {

@@ -19,20 +19,20 @@
                     <li>{% for category in categories %}
                             <h2>{{ category.title }}</h2>
                         <ul>
-                            <li>{% for project in projects %}
+                            <li>{% for project in category.projects %}
                                 <h3>{{ project.title }}</h3>
-                                    <ul>
-                                        <li>{% for executor in executors %}
-                                            <h2>{{ executor.secondName }}</h2>
-                                            {% endfor %}
-                                        </li>
-                                    </ul>
+                                    {#<ul>#}
+                                        {#<li>{% for executor in executors %}#}
+                                            {#<h2>{{ executor.secondName }}</h2>#}
+                                            {#{% endfor %}#}
+                                        {#</li>#}
+                                    {#</ul>#}
                                 {% endfor %}
                             </li>
                         </ul>
                         {% endfor %}
                     </li>
-                </ul>
+                 </ul>
                 
                 <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
             </div>
