@@ -46,6 +46,8 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Hello, world!</h1>
+            <h2><a href="{{ path('_executors') }}">Executors</a></h2>
+            <h3><a href="{{ path('_executor_create') }}">Create executors</a></h3>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
             <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
         </div>
@@ -54,20 +56,18 @@
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-lg-4">
-                {% for project in projects %}
-                    {{ project.title }}
+             <div class="col-lg-4">
+                {% for category in categories %}
+                    <h2>{{ category.title }}</h2>
+                    {% for project in projects %}
+                        <h3>{{ project.title }}</h3>
+                            {% for executor in executors %}
+                                <h2>{{ executor.projects }}</h2>
+                            {% endfor %}
+                    {% endfor %}
                 {% endfor %}
                 <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
             </div>
         </div>
-
-        <hr>
-
-        <footer>
-            <p>&copy; Company 2013</p>
-        </footer>
     </div> <!-- /container -->
-
-
 {% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'WebKateTestTaskBundle::layout.html.twig' %}
+
+{% block body %}
+    {% for executor in executors %}
+        <h4>{{ executor.secondName }}</h4>
+    {% endfor %}
+{% endblock %}

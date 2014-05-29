@@ -17,15 +17,31 @@ class DefaultController extends Controller
             ->getRepository('WebKateTestTaskBundle:Project')
             ->findAll()
         ;
+        $categories = $this->getDoctrine()
+            ->getRepository('WebKateTestTaskBundle:Category')
+            ->findAll()
+        ;
+
+        $executors = $this->get('web_kate_test_task_bundle.executor.repository')
+            ->findAllOrderByCareerBeggining()
+        ;
 
         return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
-            'projects' => $projects
+            'projects' => $projects,
+            'categories' => $categories,
+            'executors' => $executors,
         ));
     }
 
-    public function allExecutorsAction()
+    public function executorsAction()
     {
-        $executors = $this->get('')
+        $executors = $this->get('web_kate_test_task_bundle.executor.repository')
+            ->findAllOrderByCareerBeggining()
+            ;
+
+        return $this->render('WebKateTestTaskBundle:Default:executors.html.twig', array(
+           'executors' => $executors,
+        ));
     }
     public function createExecutorAction(Request $request)
     {
@@ -45,5 +61,15 @@ class DefaultController extends Controller
         ));
     }
 
+//    public function treeAction()
+//    {
+//        $categories = $this->getDoctrine()
+//            ->getRepository('WebKateTestTaskBundle:Category')
+//            ;
+//
+//        return $this->render('WebKateTestTaskBundle:Default:tree.html.twig', array(
+//            'categories' => $categories,
+//        ));
+//    }
 
 }

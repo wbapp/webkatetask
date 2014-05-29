@@ -5,3 +5,7 @@ _homepage:
 _executor_create:
     path: /executor/create
     defaults: { _controller: WebKateTestTaskBundle:Default:createExecutor }
+
+_executors:
+    path: /executors
+    defaults: { _controller: WebKateTestTaskBundle:Default:executors }

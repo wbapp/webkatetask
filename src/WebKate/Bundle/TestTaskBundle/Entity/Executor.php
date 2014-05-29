@@ -338,7 +338,7 @@ class Executor
 
     public function __toString()
     {
-        return $this->getSecondName();
+        return $this->getSecondName() . $this->getFirstName() . $this->getPatronymic();
     }
 
 }
