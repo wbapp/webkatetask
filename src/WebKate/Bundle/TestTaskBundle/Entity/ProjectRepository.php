@@ -22,4 +22,28 @@ class ProjectRepository extends EntityRepository
             ->getResult()
         ;
     }
-} 
+
+    public function getProjectsWithExecutors()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+            'SELECT p, e
+            FROM WebKateTestTaskBundle:Project p
+            LEFT JOIN projects_executors
+            ON p.id = projects_executors.project_id
+            LEFT JOIN WebKateTestTaskBundle:Executor e
+            ON e.id = projects_executors.executor_id'
+            )
+        ;
+    }
+//    public function getProjectsWithExecutors()
+//    {
+//        return $this->createQueryBuilder('p')
+//            ->select('p', 'e')
+//            ->leftJoin('p.executors', 'e')
+//            ->OrderBy('e.createdAt')
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+}

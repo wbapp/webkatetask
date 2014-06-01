@@ -12,6 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExecutorRepository extends EntityRepository
 {
+    public function findExecutorsByProject($projectId)
+    {
+        return $this->createQueryBuilder('e')
+            ->Where('e.projects = :project_id')
+            ->OrderBy('e.careerBeggining')
+            ->setParameter('project_id', $projectId)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     public function findAllOrderByCareerBeggining()
     {
         return $this->createQueryBuilder('e')

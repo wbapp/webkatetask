@@ -24,17 +24,32 @@ class DefaultController extends Controller
         $categories = $em->getRepository('WebKateTestTaskBundle:Category')
             ->getCategoriesWithProjects()
         ;
-        var_dump($categories);
+
+        $projects = $em->getRepository('WebKateTestTaskBundle:Project')
+            ->getProjectsWithExecutors()
+        ;
+
+
+        var_dump($projects);
+
 //        $executors = $this->get('web_kate_test_task_bundle.executor.repository')
 //            ->findAllOrderByCareerBeggining()
 //        ;
+
         foreach($categories as $category) {
             $category->setProjects(
                 $em->getRepository('WebKateTestTaskBundle:Project')
                     ->findProjectsByCategoryId($category->getId()));
         }
+
+        foreach($projects as $project) {
+            $project->setExecutors(
+                $em->getRepository('WebKateTestTaskBundle:Executor')
+                    ->findExecutorsByProject($project->getId()));
+        }
+
         return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
-//            'projects' => $projects,
+            'projects' => $projects,
             'categories' => $categories,
 //            'executors' => $executors,
         ));
