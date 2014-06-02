@@ -6,52 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use WebKate\Bundle\TestTaskBundle\Entity\Executor;
 use WebKate\Bundle\TestTaskBundle\Form\Type\ExecutorType;
-use WebKate\Bundle\TestTaskBundle\Entity\Category;
-use WebKate\Bundle\TestTaskBundle\Entity\Project;
-use WebKate\Bundle\TestTaskBundle\Entity\CategoryRepository;
 
 class DefaultController extends Controller
 {
 
     public function indexAction()
     {
-//        $projects = $this->getDoctrine()
-//            ->getManager()
-//            ->getRepository('WebKateTestTaskBundle:Project')
-//            ->findAll()
-//        ;
-        $em = $this->getDoctrine()->getManager();
-        $categories = $em->getRepository('WebKateTestTaskBundle:Category')
-            ->getCategoriesWithProjects()
-        ;
 
-        $projects = $em->getRepository('WebKateTestTaskBundle:Project')
-            ->getProjectsWithExecutors()
-        ;
+        $categories = $this->get('web_kate_test_task_bundle.tree_structure')
+            ->getCategoriesWithProjects();
 
-
-        var_dump($projects);
-
-//        $executors = $this->get('web_kate_test_task_bundle.executor.repository')
-//            ->findAllOrderByCareerBeggining()
-//        ;
-
-        foreach($categories as $category) {
-            $category->setProjects(
-                $em->getRepository('WebKateTestTaskBundle:Project')
-                    ->findProjectsByCategoryId($category->getId()));
-        }
-
-        foreach($projects as $project) {
-            $project->setExecutors(
-                $em->getRepository('WebKateTestTaskBundle:Executor')
-                    ->findExecutorsByProject($project->getId()));
-        }
+        $projects = $this->get('web_kate_test_task_bundle.tree_structure')
+            ->getProjectsWithExecutors();
 
         return $this->render('WebKateTestTaskBundle:Default:index.html.twig', array(
             'projects' => $projects,
             'categories' => $categories,
-//            'executors' => $executors,
         ));
     }
 
@@ -82,16 +52,5 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
-
-//    public function treeAction()
-//    {
-//        $categories = $this->getDoctrine()
-//            ->getRepository('WebKateTestTaskBundle:Category')
-//            ;
-//
-//        return $this->render('WebKateTestTaskBundle:Default:tree.html.twig', array(
-//            'categories' => $categories,
-//        ));
-//    }
 
 }

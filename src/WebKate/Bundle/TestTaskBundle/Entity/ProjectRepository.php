@@ -23,7 +23,7 @@ class ProjectRepository extends EntityRepository
         ;
     }
 
-    public function getProjectsWithExecutors()
+    public function findProjectsAssociatedWithExecutors()
     {
         return $this->getEntityManager()
             ->createQuery(

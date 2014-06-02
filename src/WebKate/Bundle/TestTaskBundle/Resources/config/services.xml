@@ -16,6 +16,10 @@
             <argument>WebKateTestTaskBundle:Category</argument>
         </service>
 
+        <service id="web_kate_test_task_bundle.category.repository" class="WebKate\Bundle\TestTaskBundle\Entity\ProjectRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WebKateTestTaskBundle:Project</argument>
+        </service>
+
         <service id="web_kate_test_task_bundle.tree_structure" class="WebKate\Bundle\TestTaskBundle\TreeStructure\TreeStructure">
             <argument type="service" id="web_kate_test_task_bundle.executor.repository"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
